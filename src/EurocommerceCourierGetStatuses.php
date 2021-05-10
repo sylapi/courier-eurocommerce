@@ -30,7 +30,13 @@ class EurocommerceCourierGetStatuses implements CourierGetStatuses
                 $response = new Status(StatusType::NEW);
             }
             $parcel = $parcels[0];
-            return new Status((string) new EurocommerceStatusTransformer($parcel->getStatus()));
+            $status =  new Status((string) new EurocommerceStatusTransformer($parcel->getStatus()));
+            $status->carrier = $parcel->getCarrier();
+            $status->original = $parcel->getOriginalStatus();
+            $status->addData = $parcel->getAddData();
+            $status->sentDate = $parcel->getSentDate();
+            $status->deliveryDate = $parcel->getDeliveryDate();
+            return $status;
 
         } catch (\Exception $e) {            
             $response = new Status(StatusType::APP_RESPONSE_ERROR);
