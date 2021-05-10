@@ -1,6 +1,6 @@
 # Courier-eurocommerce
 
-![StyleCI](https://github.styleci.io/repos/0000000/shield?style=flat&style=flat) ![PHPStan](https://img.shields.io/badge/PHPStan-level%205-brightgreen.svg?style=flat) [![Build](https://github.com/sylapi/courier-eurocommerce/actions/workflows/build.yaml/badge.svg?event=push)](https://github.com/sylapi/courier-eurocommerce/actions/workflows/build.yaml) [![codecov.io](https://codecov.io/github/sylapi/courier-eurocommerce/coverage.svg)](https://codecov.io/github/sylapi/courier-eurocommerce/)
+![PHPStan](https://img.shields.io/badge/PHPStan-level%205-brightgreen.svg?style=flat) [![Build](https://github.com/sylapi/courier-eurocommerce/actions/workflows/build.yaml/badge.svg?event=push)](https://github.com/sylapi/courier-eurocommerce/actions/workflows/build.yaml) [![codecov.io](https://codecov.io/github/sylapi/courier-eurocommerce/coverage.svg)](https://codecov.io/github/sylapi/courier-eurocommerce/)
 
 ## Methody
 
@@ -128,6 +128,11 @@
             var_dump($response->getFirstError()->getMessage());
         } else {
             var_dump((string) $response);
+            var_dump($response->carrier); // Kod przewoźnika
+            var_dump($response->original); // Status przesyłki u przewoźnika. Pole uzależnione od rodzaju przewoźnika.
+            var_dump($response->addData); // Data i czas zarejestrowania przesyłki w systemie przewoźnika.
+            var_dump($response->sentDate); // Data i czas wysłania przesyłki
+            var_dump($response->deliveryDate); // Data i czas dostarczenia przesyłki
         }
     } catch (\Exception $e) {
         var_dump($e->getMessage());
