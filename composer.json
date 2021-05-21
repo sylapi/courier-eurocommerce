@@ -12,17 +12,11 @@
         {
             "name": "Adrian Zapotoczny"
         }
-    ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/sylapi/eurocommerce-linker.git"
-        }
-    ],    
+    ],  
     "require": {
         "php": ">=8.0.0",
         "sylapi/courier": "^2.0",
-        "sylapi/eurocommerce-linker": "dev-master"
+        "sylapi/eurocommerce-linker": "^0.1.0"
     },  
     "require-dev": {
         "phpunit/phpunit": "^9.5",
