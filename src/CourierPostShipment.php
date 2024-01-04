@@ -29,7 +29,7 @@ class CourierPostShipment implements CourierPostShipmentContract
             $order->setStatus(OrderStatusType::TRANSFERRED); 
             $result = $client->orders()->update($order);
             $response->setResponse($result);
-            $response->setShipmentId($result->getId());
+            $response->setShipmentId((string) $result->getId());
             return $response;
         } catch (\Exception $e) {
             throw new TransportException($e->getMessage(), $e->getCode());

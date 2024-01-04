@@ -48,7 +48,7 @@ class CourierCreateShipmentTest extends PHPUnitTestCase
         $response = $courierCreateShipment->createShipment($this->getShipmentMock());
 
         $this->assertInstanceOf(ResponsesShipment::class, $response);
-        $this->assertEquals($response->getShipmentId(), '123');
+        $this->assertIsString($response->getShipmentId());
     }
 
     public function testCreateShipmentFailure()

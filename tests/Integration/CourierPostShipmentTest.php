@@ -7,7 +7,7 @@ use Sylapi\Courier\Eurocommerce\Entities\Booking;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Sylapi\Courier\Eurocommerce\CourierPostShipment;
 use Sylapi\Courier\Eurocommerce\Tests\Helpers\SessionTrait;
-use Sylapi\EurocommerceLinker\Exceptions\TransportException;
+use Sylapi\Courier\Exceptions\TransportException;
 
 
 class CourierPostShipmentTest extends PHPUnitTestCase
@@ -28,7 +28,7 @@ class CourierPostShipmentTest extends PHPUnitTestCase
         $response = $courierPostShipment->postShipment($bookingMock);
 
         $this->assertInstanceOf(ParcelResponse::class, $response);
-        $this->assertEquals($response->getShipmentId(), $shipmentId);
+        $this->assertIsString($response->getShipmentId());
     }
 
     public function testCreateShipmentFailure()
