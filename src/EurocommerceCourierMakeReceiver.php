@@ -7,7 +7,7 @@ namespace Sylapi\Courier\Eurocommerce;
 use Sylapi\Courier\Contracts\CourierMakeReceiver;
 use Sylapi\Courier\Contracts\Receiver;
 
-class EurocommerceCourierMakeReceiver implements CourierMakeReceiver
+class  CourierMakeReceiver implements CourierMakeReceiver
 {
     public function makeReceiver(): Receiver
     {

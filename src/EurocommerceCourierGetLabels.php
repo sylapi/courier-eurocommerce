@@ -9,7 +9,7 @@ use Sylapi\Courier\Contracts\Label as LabelContract;
 use Sylapi\Courier\Entities\Label;
 use Sylapi\Courier\Exceptions\UnavailableMethodException;
 
-class EurocommerceCourierGetLabels implements CourierGetLabels
+class  CourierGetLabels implements CourierGetLabels
 {
     private $session;
 

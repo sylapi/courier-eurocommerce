@@ -14,7 +14,7 @@ use Sylapi\Courier\Eurocommerce\EurocommerceSession;
 use Sylapi\Courier\Eurocommerce\EurocommerceSessionFactory;
 use Sylapi\Courier\Eurocommerce\EurocommerceShipment;
 
-class EurocommerceCourierApiFactoryTest extends PHPUnitTestCase
+class  CourierApiFactoryTest extends PHPUnitTestCase
 {
     /**
      * @var array<string,mixed>

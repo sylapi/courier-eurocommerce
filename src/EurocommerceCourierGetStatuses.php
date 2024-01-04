@@ -11,7 +11,7 @@ use Sylapi\Courier\Contracts\CourierGetStatuses;
 use Sylapi\Courier\Contracts\Status as StatusContract;
 
 
-class EurocommerceCourierGetStatuses implements CourierGetStatuses
+class  CourierGetStatuses implements CourierGetStatuses
 {
     private $session;
 

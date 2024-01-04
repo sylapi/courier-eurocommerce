@@ -7,7 +7,7 @@ namespace Sylapi\Courier\Eurocommerce;
 use Sylapi\Courier\Contracts\Booking;
 use Sylapi\Courier\Contracts\CourierMakeBooking;
 
-class EurocommerceCourierMakeBooking implements CourierMakeBooking
+class  CourierMakeBooking implements CourierMakeBooking
 {
     public function makeBooking(): Booking
     {

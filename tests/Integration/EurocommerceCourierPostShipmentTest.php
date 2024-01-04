@@ -8,7 +8,7 @@ use Sylapi\Courier\Eurocommerce\EurocommerceBooking;
 use Sylapi\Courier\Eurocommerce\EurocommerceCourierPostShipment;
 use Sylapi\Courier\Eurocommerce\Tests\Helpers\EurocommerceSessionTrait;
 
-class EurocommerceCourierPostShipmentTest extends PHPUnitTestCase
+class  CourierPostShipmentTest extends PHPUnitTestCase
 {
     use EurocommerceSessionTrait;
 

@@ -11,7 +11,7 @@ use Sylapi\Courier\Eurocommerce\EurocommerceSender;
 use Sylapi\Courier\Eurocommerce\EurocommerceShipment;
 use Sylapi\Courier\Eurocommerce\Tests\Helpers\EurocommerceSessionTrait;
 
-class EurocommerceCourierCreateShipmentTest extends PHPUnitTestCase
+class  CourierCreateShipmentTest extends PHPUnitTestCase
 {
     use EurocommerceSessionTrait;
 

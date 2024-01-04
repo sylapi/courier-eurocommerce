@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Sylapi\Courier\Eurocommerce;
 
-use Sylapi\Courier\Entities\Response;
 use Sylapi\Courier\Contracts\Shipment;
+use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
 use Sylapi\Courier\Helpers\ResponseHelper;
+use Sylapi\Courier\Helpers\ReferenceHelper;
 use Sylapi\EurocommerceLinker\Entities\Order;
 use Sylapi\EurocommerceLinker\Enums\CarierType;
-use Sylapi\Courier\Helpers\ReferenceHelper;
-use Sylapi\Courier\Contracts\CourierCreateShipment;
+use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
 use Sylapi\Courier\Contracts\Response as ResponseContract;
+use Sylapi\Courier\Eurocommerce\Responses\Shipment as ShipmentResponse;
+use Sylapi\Courier\Contracts\CourierCreateShipment as CourierCreateShipmentContract;
 
-class EurocommerceCourierCreateShipment implements CourierCreateShipment
+class CourierCreateShipment implements CourierCreateShipmentContract
 {
 
     const ORDER_STATUS = OrderStatusType::DRAFT;
@@ -22,7 +24,7 @@ class EurocommerceCourierCreateShipment implements CourierCreateShipment
 
     private $session;
 
-    public function __construct(EurocommerceSession $session)
+    public function __construct(Session $session)
     {
         $this->session = $session;
     }
@@ -30,25 +32,23 @@ class EurocommerceCourierCreateShipment implements CourierCreateShipment
     public function createShipment(Shipment $shipment): ResponseContract
     {
         $client = $this->session->client();
-        $response = new Response();
+        $response = new ShipmentResponse();
         $request = $this->request($shipment);
 
         try {
             $result = $client->orders()->create($request);
-
-            $response->shipmentId = $result->getId();
-            $response->trackingId = null;
+            $response->setShipmentId((string) $result->getId());
+            return $response;
             
         } catch (\Exception $e) {
-            ResponseHelper::pushErrorsToResponse($response, [$e]);
+            throw new TransportException($e->getMessage(), $e->getCode());
         }
-
-        return $response;
     }
 
     private function request(Shipment $shipment): Order
     {
         $client = $this->session->client();
+        $options = $shipment->getOptions();
 
         $delivery = $client->make()->delivery();
         $delivery->setCarier(CarierType::POCZTK48OP);
@@ -57,6 +57,8 @@ class EurocommerceCourierCreateShipment implements CourierCreateShipment
             $delivery->setAdditionalInfo($this->session->parameters()->pickupPlaceId);
         }
 
+        //TODO: Services
+        /*
         if($this->session->parameters()->hasProperty('cod') 
             && is_array($this->session->parameters()->cod)
             && isset($this->session->parameters()->cod['amount'])
@@ -65,7 +67,10 @@ class EurocommerceCourierCreateShipment implements CourierCreateShipment
             $delivery->setCurrencyCOD($this->session->parameters()->cod['currency'])
                 ->setAmountCOD($this->session->parameters()->cod['amount']);
         }
-
+        */
+        /**
+         * @var ShipmentEntity $shipment
+         */
         $products = (array) $shipment->getProducts(); /* @phpstan-ignore-line */   
         $positions = $client->make()->positions();
         foreach ($products as $product) {

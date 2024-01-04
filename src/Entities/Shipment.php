@@ -2,27 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Sylapi\Courier\Eurocommerce;
+namespace Sylapi\Courier\Eurocommerce\Entities;
 
 use Rakit\Validation\Validator;
-use Sylapi\Courier\Abstracts\Shipment;
+use Sylapi\Courier\Abstracts\Shipment as ShipmentAbstract;
 
-class EurocommerceShipment extends Shipment
+class Shipment extends ShipmentAbstract
 {
-    private $products;
-
-    public function setProducts(?array $products): self
-    {
-        $this->products = $products;
-
-        return $this;
-    }
-
-    public function getProducts(): ?array
-    {
-        return $this->products;
-    }
-    
     public function getQuantity(): int
     {
         return 1;

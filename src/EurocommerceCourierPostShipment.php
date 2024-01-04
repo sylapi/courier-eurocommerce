@@ -11,7 +11,7 @@ use Sylapi\Courier\Contracts\CourierPostShipment;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
 use Sylapi\Courier\Contracts\Response as ResponseContract;
 
-class EurocommerceCourierPostShipment implements CourierPostShipment
+class  CourierPostShipment implements CourierPostShipment
 {
     private $session;
 

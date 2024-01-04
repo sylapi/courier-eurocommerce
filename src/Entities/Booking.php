@@ -2,19 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Sylapi\Courier\Eurocommerce;
+namespace Sylapi\Courier\Eurocommerce\Entities;
 
 use Rakit\Validation\Validator;
-use Sylapi\Courier\Abstracts\Receiver;
+use Sylapi\Courier\Abstracts\Booking as BookingAbstract;
 
-class EurocommerceReceiver extends Receiver
+class Booking extends BookingAbstract
 {
+
     public function validate(): bool
     {
         $rules = [
+            'shipmentId' => 'required',
         ];
-
-        $data = $this->toArray();
+        $data = [
+            'shipmentId' => $this->getShipmentId(),
+        ];
 
         $validator = new Validator();
 

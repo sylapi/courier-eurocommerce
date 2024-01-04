@@ -7,7 +7,7 @@ use Sylapi\Courier\Contracts\Status;
 use Sylapi\Courier\Eurocommerce\EurocommerceCourierGetStatuses;
 use Sylapi\Courier\Eurocommerce\Tests\Helpers\EurocommerceSessionTrait;
 
-class EurocommerceCourierGetStatusTest extends PHPUnitTestCase
+class  CourierGetStatusTest extends PHPUnitTestCase
 {
     use EurocommerceSessionTrait;
 

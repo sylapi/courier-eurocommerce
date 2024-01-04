@@ -8,7 +8,7 @@ use Sylapi\Courier\Eurocommerce\EurocommerceReceiver;
 use Sylapi\Courier\Eurocommerce\EurocommerceSender;
 use Sylapi\Courier\Eurocommerce\EurocommerceShipment;
 
-class EurocommerceShipmentTest extends PHPUnitTestCase
+class  ShipmentTest extends PHPUnitTestCase
 {
     public function testNumberOfPackagesIsAlwaysEqualTo1(): void
     {
