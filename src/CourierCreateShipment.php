@@ -6,7 +6,6 @@ namespace Sylapi\Courier\Eurocommerce;
 
 use Sylapi\Courier\Contracts\Shipment;
 use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
-use Sylapi\Courier\Helpers\ResponseHelper;
 use Sylapi\Courier\Helpers\ReferenceHelper;
 use Sylapi\EurocommerceLinker\Entities\Order;
 use Sylapi\EurocommerceLinker\Enums\CarierType;
@@ -53,12 +52,13 @@ class CourierCreateShipment implements CourierCreateShipmentContract
         $delivery = $client->make()->delivery();
         $delivery->setCarier(CarierType::POCZTK48OP);
 
+        //TODO: Services
+        /*
         if($this->session->parameters()->hasProperty('pickupPlaceId')) {
             $delivery->setAdditionalInfo($this->session->parameters()->pickupPlaceId);
         }
 
-        //TODO: Services
-        /*
+
         if($this->session->parameters()->hasProperty('cod') 
             && is_array($this->session->parameters()->cod)
             && isset($this->session->parameters()->cod['amount'])
@@ -71,6 +71,7 @@ class CourierCreateShipment implements CourierCreateShipmentContract
         /**
          * @var ShipmentEntity $shipment
          */
+        
         $products = (array) $shipment->getProducts(); /* @phpstan-ignore-line */   
         $positions = $client->make()->positions();
         foreach ($products as $product) {
