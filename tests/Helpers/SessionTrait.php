@@ -2,13 +2,13 @@
 
 namespace Sylapi\Courier\Eurocommerce\Tests\Helpers;
 
-use Sylapi\Courier\Eurocommerce\EurocommerceParameters;
-use Sylapi\Courier\Eurocommerce\EurocommerceSession;
+
 use Sylapi\EurocommerceLinker\Api;
 use Sylapi\EurocommerceLinker\Entities;
+use Sylapi\Courier\Eurocommerce\Session;
 use Sylapi\EurocommerceLinker\Exceptions\TransportException;
 
-trait EurocommerceSessionTrait
+trait SessionTrait
 {
     private function getClientMock($apiFailure = false)
     {
@@ -39,11 +39,9 @@ trait EurocommerceSessionTrait
 
     private function getSessionMock($clientMock)
     {
-        $sessionMock = $this->createMock(EurocommerceSession::class);
+        $sessionMock = $this->createMock(Session::class);
         $sessionMock->method('client')
             ->willReturn($clientMock);
-        $sessionMock->method('parameters')
-            ->willReturn(EurocommerceParameters::create([]));
 
         return $sessionMock;
     }

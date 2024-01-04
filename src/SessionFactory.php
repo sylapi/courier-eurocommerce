@@ -6,7 +6,7 @@ namespace Sylapi\Courier\Eurocommerce;
 
 use Sylapi\Courier\Eurocommerce\Entities\Credentials;
 
-class  SessionFactory
+class SessionFactory
 {
     private $sessions = [];
 

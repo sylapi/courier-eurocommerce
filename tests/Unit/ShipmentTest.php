@@ -2,18 +2,18 @@
 
 namespace Sylapi\Courier\Eurocommerce\Tests\Unit;
 
+use Sylapi\Courier\Eurocommerce\Entities\Parcel;
+use Sylapi\Courier\Eurocommerce\Entities\Sender;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
-use Sylapi\Courier\Eurocommerce\EurocommerceParcel;
-use Sylapi\Courier\Eurocommerce\EurocommerceReceiver;
-use Sylapi\Courier\Eurocommerce\EurocommerceSender;
-use Sylapi\Courier\Eurocommerce\EurocommerceShipment;
+use Sylapi\Courier\Eurocommerce\Entities\Receiver;
+use Sylapi\Courier\Eurocommerce\Entities\Shipment;
 
-class  ShipmentTest extends PHPUnitTestCase
+class ShipmentTest extends PHPUnitTestCase
 {
     public function testNumberOfPackagesIsAlwaysEqualTo1(): void
     {
-        $parcel = new EurocommerceParcel();
-        $shipment = new EurocommerceShipment();
+        $parcel = new Parcel();
+        $shipment = new Shipment();
         $shipment->setParcel($parcel);
         $shipment->setParcel($parcel);
 
@@ -22,11 +22,11 @@ class  ShipmentTest extends PHPUnitTestCase
 
     public function testShipmentValidate(): void
     {
-        $receiver = new EurocommerceReceiver();
-        $sender = new EurocommerceSender();
-        $parcel = new EurocommerceParcel();
+        $receiver = new Receiver();
+        $sender = new Sender();
+        $parcel = new Parcel();
 
-        $shipment = new EurocommerceShipment();
+        $shipment = new Shipment();
         $shipment->setSender($sender)
             ->setReceiver($receiver)
             ->setParcel($parcel);

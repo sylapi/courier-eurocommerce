@@ -7,7 +7,7 @@ use Sylapi\Courier\Contracts\Response as ResponseContract;
 
 class Shipment extends ShipmentResponse
 {
-    private $trackingId;
+    private $referenceId;
 
     public function setReferenceId(string $referenceId): ResponseContract
     {

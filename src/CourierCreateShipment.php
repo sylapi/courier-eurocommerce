@@ -71,8 +71,8 @@ class CourierCreateShipment implements CourierCreateShipmentContract
         /**
          * @var ShipmentEntity $shipment
          */
-        
-        $products = (array) $shipment->getProducts(); /* @phpstan-ignore-line */   
+
+        $products = (array) $shipment->getProducts();
         $positions = $client->make()->positions();
         foreach ($products as $product) {
             $position = $client->make()->position();
