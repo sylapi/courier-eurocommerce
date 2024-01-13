@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Sylapi\Courier\Eurocommerce;
 
 use Sylapi\Courier\Contracts\Shipment;
-use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
 use Sylapi\Courier\Helpers\ReferenceHelper;
+use Sylapi\Courier\Eurocommerce\Services\COD;
 use Sylapi\EurocommerceLinker\Entities\Order;
 use Sylapi\EurocommerceLinker\Enums\CarierType;
 use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
+use Sylapi\Courier\Eurocommerce\Services\PickupPoint;
 use Sylapi\Courier\Contracts\Response as ResponseContract;
+use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
 use Sylapi\Courier\Eurocommerce\Responses\Shipment as ShipmentResponse;
 use Sylapi\Courier\Contracts\CourierCreateShipment as CourierCreateShipmentContract;
 
@@ -47,31 +49,31 @@ class CourierCreateShipment implements CourierCreateShipmentContract
     private function request(Shipment $shipment): Order
     {
         $client = $this->session->client();
-        $options = $shipment->getOptions();
 
         $delivery = $client->make()->delivery();
         $delivery->setCarier(CarierType::POCZTK48OP);
 
-        //TODO: Services
-        /*
-        if($this->session->parameters()->hasProperty('pickupPlaceId')) {
-            $delivery->setAdditionalInfo($this->session->parameters()->pickupPlaceId);
-        }
 
-
-        if($this->session->parameters()->hasProperty('cod') 
-            && is_array($this->session->parameters()->cod)
-            && isset($this->session->parameters()->cod['amount'])
-            && isset($this->session->parameters()->cod['currency'])
-        ) {
-            $delivery->setCurrencyCOD($this->session->parameters()->cod['currency'])
-                ->setAmountCOD($this->session->parameters()->cod['amount']);
+        /**
+         * Services
+         */
+        $services = $shipment->getServices();
+        if($services) {
+            foreach($services as $service) {
+                if($service instanceof COD) {
+                    $delivery->setCurrencyCOD($service->getCurrency())
+                        ->setAmountCOD($service->getAmount());
+                } else if ($service instanceof PickupPoint) {
+                    $delivery->setAdditionalInfo($service->getPickupId());
+                } else {
+                    throw new \Exception('Unknown service');
+                }
+            }
         }
-        */
+        
         /**
          * @var ShipmentEntity $shipment
          */
-
         $products = (array) $shipment->getProducts();
         $positions = $client->make()->positions();
         foreach ($products as $product) {
