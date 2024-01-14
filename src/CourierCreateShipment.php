@@ -16,6 +16,7 @@ use Sylapi\Courier\Contracts\Response as ResponseContract;
 use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
 use Sylapi\Courier\Eurocommerce\Responses\Shipment as ShipmentResponse;
 use Sylapi\Courier\Contracts\CourierCreateShipment as CourierCreateShipmentContract;
+use Sylapi\Courier\Responses\Shipment as ResponseShipment;
 
 class CourierCreateShipment implements CourierCreateShipmentContract
 {
@@ -30,7 +31,7 @@ class CourierCreateShipment implements CourierCreateShipmentContract
         $this->session = $session;
     }
 
-    public function createShipment(Shipment $shipment): ResponseContract
+    public function createShipment(Shipment $shipment): ResponseShipment
     {
         $client = $this->session->client();
         $response = new ShipmentResponse();
