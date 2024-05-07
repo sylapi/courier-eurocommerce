@@ -12,7 +12,6 @@ use Sylapi\EurocommerceLinker\Enums\CarierType;
 use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
 use Sylapi\Courier\Eurocommerce\Services\PickupPoint;
-use Sylapi\Courier\Contracts\Response as ResponseContract;
 use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
 use Sylapi\Courier\Eurocommerce\Responses\Shipment as ShipmentResponse;
 use Sylapi\Courier\Contracts\CourierCreateShipment as CourierCreateShipmentContract;
@@ -52,8 +51,7 @@ class CourierCreateShipment implements CourierCreateShipmentContract
         $client = $this->session->client();
 
         $delivery = $client->make()->delivery();
-        $delivery->setCarier(CarierType::POCZTK48OP);
-
+        $delivery->setCarier(CarierType::POCZTK48ST);
 
         /**
          * Services

@@ -7,7 +7,6 @@ use Sylapi\Courier\Responses\Status as StatusResponse;
 class Status extends StatusResponse
 {
     private string $carrier;
-    private string $original;
     private string $addData;
     private string $sentDate;
     private string $deliveryDate;
@@ -23,18 +22,6 @@ class Status extends StatusResponse
     public function getCarrier(): string
     {
         return $this->carrier;
-    }
-
-    public function setOriginal(string $original): StatusResponse
-    {
-        $this->original = $original;
-
-        return $this;
-    }
-
-    public function getOriginal(): string
-    {
-        return $this->original;
     }
 
     public function setAddData(string $addData): StatusResponse

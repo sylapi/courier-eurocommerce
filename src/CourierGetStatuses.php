@@ -8,7 +8,6 @@ use Sylapi\Courier\Eurocommerce\Responses\Status as StatusResponse;
 use Sylapi\Courier\Enums\StatusType;
 use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\Courier\Contracts\CourierGetStatuses as CourierGetStatusesContract;
-use Sylapi\Courier\Contracts\Response as ResponseContract;
 use Sylapi\Courier\Responses\Status as ResponseStatus;
 
 class CourierGetStatuses implements CourierGetStatusesContract
@@ -30,9 +29,8 @@ class CourierGetStatuses implements CourierGetStatusesContract
                 return new StatusResponse(StatusType::NEW->value);
             }
             $parcel = $parcels[0];
-            $status =  new StatusResponse((string) new StatusTransformer($parcel->getStatus()));
+            $status =  new StatusResponse((string) new StatusTransformer($parcel->getStatus()), $parcel->getOriginalStatus());
             $status->setCarrier($parcel->getCarrier());
-            $status->setOriginal($parcel->getOriginalStatus());
             $status->setAddData($parcel->getAddData());
             $status->setSentDate($parcel->getSentDate());
             $status->setDeliveryDate($parcel->getDeliveryDate());

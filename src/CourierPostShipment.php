@@ -7,7 +7,6 @@ namespace Sylapi\Courier\Eurocommerce;
 use Sylapi\Courier\Contracts\Booking;
 use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
-use Sylapi\Courier\Contracts\Response as ResponseContract;
 use Sylapi\Courier\Eurocommerce\Responses\Parcel as ParcelResponse;
 use Sylapi\Courier\Contracts\CourierPostShipment as CourierPostShipmentContract;
 use Sylapi\Courier\Responses\Parcel as ResponseParcel;
