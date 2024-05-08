@@ -9,13 +9,14 @@ use Sylapi\Courier\Helpers\ReferenceHelper;
 use Sylapi\Courier\Eurocommerce\Services\COD;
 use Sylapi\EurocommerceLinker\Entities\Order;
 use Sylapi\EurocommerceLinker\Enums\CarierType;
+use Sylapi\Courier\Eurocommerce\Entities\Options;
 use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
 use Sylapi\Courier\Eurocommerce\Services\PickupPoint;
+use Sylapi\Courier\Responses\Shipment as ResponseShipment;
 use Sylapi\Courier\Eurocommerce\Entities\Shipment as ShipmentEntity;
 use Sylapi\Courier\Eurocommerce\Responses\Shipment as ShipmentResponse;
 use Sylapi\Courier\Contracts\CourierCreateShipment as CourierCreateShipmentContract;
-use Sylapi\Courier\Responses\Shipment as ResponseShipment;
 
 class CourierCreateShipment implements CourierCreateShipmentContract
 {
@@ -51,7 +52,18 @@ class CourierCreateShipment implements CourierCreateShipmentContract
         $client = $this->session->client();
 
         $delivery = $client->make()->delivery();
-        $delivery->setCarier(CarierType::POCZTK48ST);
+
+        /**
+         * @var Options $options
+         */
+        $options = $shipment->getOptions();
+
+        $shippingType = $options->getShippingType();
+        if($shippingType === null) {
+            throw new \Exception('Shipping type is required');
+        }
+
+        $delivery->setCarier($shippingType);
 
         /**
          * Services

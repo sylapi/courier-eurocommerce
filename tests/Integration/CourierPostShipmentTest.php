@@ -31,7 +31,7 @@ class CourierPostShipmentTest extends PHPUnitTestCase
         $this->assertIsString($response->getShipmentId());
     }
 
-    public function testCreateShipmentFailure()
+    public function testPostShipmentFailure()
     {
         $clientMock = $this->getClientMock(true);
         $sessionMock = $this->getSessionMock($clientMock);
