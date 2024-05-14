@@ -8,7 +8,6 @@ use Sylapi\Courier\Contracts\Shipment;
 use Sylapi\Courier\Helpers\ReferenceHelper;
 use Sylapi\Courier\Eurocommerce\Services\COD;
 use Sylapi\EurocommerceLinker\Entities\Order;
-use Sylapi\EurocommerceLinker\Enums\CarierType;
 use Sylapi\Courier\Eurocommerce\Entities\Options;
 use Sylapi\Courier\Exceptions\TransportException;
 use Sylapi\EurocommerceLinker\Enums\OrderStatusType;
