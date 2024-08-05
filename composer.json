@@ -21,7 +21,7 @@
     ],    
     "require": {
         "php": ">=8.2.0",
-        "sylapi/courier": "v3.0.0",
+        "sylapi/courier": "v3.0",
         "sylapi/eurocommerce-linker": "^0.1.0"
     },  
     "require-dev": {
